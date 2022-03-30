@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.contrib.settings',
     'wagtail.contrib.routable_page',
-   # 'wagtail.contrib.postgres_search',
+    'wagtail.search.backends.database',
     'wagtail.contrib.modeladmin',
     
     'taggit',
@@ -108,6 +108,12 @@ WAGTAILIMAGES_MAX_IMAGE_PIXELS = 300000000 #300MP
 WAGTAILIMAGES_FORMAT_CONVERSIONS = {
     'jpg': 'jpeg',
     'webp': 'webp',
+}
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.database',
+    }
 }
 
 #Email setups
