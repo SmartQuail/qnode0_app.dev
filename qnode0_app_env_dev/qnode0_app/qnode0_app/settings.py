@@ -188,7 +188,7 @@ DB_IS_AVAIL= all([
     DB_PORT
 ])
 
-POSTGRES_READY=str(os.environ.get('POSTGRES_READY'))==1
+POSTGRES_READY=str(os.environ.get('POSTGRES_READY'))=="1"
 if DB_IS_AVAIL and POSTGRES_READY:
     DATABASES = {
         'default': {
