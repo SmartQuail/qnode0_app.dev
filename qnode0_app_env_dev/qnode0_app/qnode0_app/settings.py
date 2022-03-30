@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.contrib.settings',
     'wagtail.contrib.routable_page',
-    'wagtail.contrib.postgres_search',
+   # 'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',
     
     'taggit',
