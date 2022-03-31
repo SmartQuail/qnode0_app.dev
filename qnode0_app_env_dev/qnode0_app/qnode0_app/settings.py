@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get('POSTGRES_READY')))=="1"
+DEBUG = bool(int(os.environ.get('DEBUG',0)))
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS.extend(
@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.contrib.settings',
     'wagtail.contrib.routable_page',
-    'wagtail.search.backends.database',
+    'wagtail.contrib.postgres_search',
     'wagtail.contrib.modeladmin',
     
     'taggit',
@@ -108,12 +108,6 @@ WAGTAILIMAGES_MAX_IMAGE_PIXELS = 300000000 #300MP
 WAGTAILIMAGES_FORMAT_CONVERSIONS = {
     'jpg': 'jpeg',
     'webp': 'webp',
-}
-
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.database',
-    }
 }
 
 #Email setups
@@ -166,38 +160,13 @@ WSGI_APPLICATION = 'qnode0_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-DB_HOST= os.environ.get("POSTGRES_HOST")
-DB_NAME=os.environ.get("POSTGRES_DB")
-DB_USER=os.environ.get("POSTGRES_USER")
-DB_PASS=os.environ.get("POSTGRES_PASSWORD")
-DB_PORT=os.environ.get("POSTGRES_PORT")
-
-DB_IS_AVAIL= all([
-    DB_HOST,
-    DB_NAME,
-    DB_USER,
-    DB_PASS,
-    DB_PORT
-])
-
-POSTGRES_READY=str(os.environ.get('POSTGRES_READY'))=="1"
-if DB_IS_AVAIL and POSTGRES_READY:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': DB_HOST,
-            'NAME': DB_NAME,
-            'USER': DB_USER,
-            'PASSWORD': DB_PASS,
-            'PORT':  DB_PORT,
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
 
