@@ -86,7 +86,7 @@ INSTALLED_APPS = [
     'localflavor',
     'widget_tweaks',
     
-    #'core',
+    'core',
     'sorl.thumbnail',
 ]
 
