@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get('DEBUG'))=="1"
-
+#DEBUG = str(os.environ.get('DEBUG'))=="1"
+DEBUG = int(bool(os.environ.get('DEBUG',1)))    
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS.extend(
     filter(None, os.environ.get('ALLOWED_HOSTS', '').split(','),
@@ -188,8 +188,8 @@ DB_IS_AVAIL = all([
     DB_PORT
 ])
 
-POSTGRES_READY=str(os.environ.get('POSTGRES_READY'))=="1"
-
+#POSTGRES_READY=str(os.environ.get('POSTGRES_READY'))=="1"
+POSTGRES_READY = int(bool(os.environ.get('POSTGRES_READ',1)))
 
 
 if DB_IS_AVAIL and POSTGRES_READY:
