@@ -169,36 +169,11 @@ WAGTAILSEARCH_BACKENDS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-DB_NAME = os.environ.get("POSTGRES_DB"),
-DB_PASS = os.environ.get("POSTGRES_PASSWORD"),
-DB_USER = os.environ.get("POSTGRES_USER"),
-DB_HOST = os.environ.get("POSTGRES_HOST"),
-DB_PORT = os.environ.get("POSTGRES_PORT")
-
-DB_IS_AVAIL = all([
-    DB_NAME,
-    DB_PASS,
-    DB_USER,
-    DB_HOST,
-    DB_PORT
-])
-
-#POSTGRES_READY=str(os.environ.get('POSTGRES_READY'))=="1"
-POSTGRES_READY = int(bool(os.environ.get('POSTGRES_READ',0)))
-if DB_IS_AVAIL and POSTGRES_READY:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': DB_HOST,
-            'NAME': DB_NAME,
-            'USER': DB_USER,
-            'PASSWORD': DB_PASS,
-            'PORT': DB_PORT,
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
 
