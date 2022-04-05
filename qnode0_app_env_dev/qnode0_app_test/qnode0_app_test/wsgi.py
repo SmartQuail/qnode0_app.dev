@@ -1,5 +1,5 @@
 """
-WSGI config for qnode0_app_test project.
+WSGI config for qnode0_app project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,9 +8,18 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
 import os
+import pathlib
+
+import dotenv
 
 from django.core.wsgi import get_wsgi_application
 
+CURRENT_DIR= pathlib.Path(__file__).resolve().parent
+BASE_DIR = CURRENT_DIR.parent
+ENV_FILE_PATH = BASE_DIR / ".env"
+
+dotenv.read_dotenv(str(ENV_FILE_PATH))
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'qnode0_app_test.settings')
 
-application = get_wsgi_application()
+application = get_wsgi_application() 
